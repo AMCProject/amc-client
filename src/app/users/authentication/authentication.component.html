@@ -1,0 +1,79 @@
+<div>
+    <div *ngIf="isLogin">
+        <form [formGroup]="loginForm">
+            
+            <div>
+                <mat-label>Email: </mat-label>
+                <mat-form-field>
+                    <input [formControlName]="'email'" type="email" matInput/>
+                </mat-form-field>
+                <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
+                    A valid email is needed
+                </mat-error>
+            </div>
+
+            <div>
+                <mat-label>Password: </mat-label>
+                <mat-form-field>
+                    <input [formControlName]="'password'" type="password" matInput/>
+                </mat-form-field>
+                <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+                    A valid password is needed : STRUGSDN
+                </mat-error>
+            </div>
+
+            <div>
+                <button (click)="login()" [disabled]="!loginForm.valid" mat-button>login</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div *ngIf="!isLogin">
+        <form [formGroup]="signUpForm">
+            
+            <div>
+                <mat-label>Name: </mat-label>
+                <mat-form-field>
+                    <input [formControlName]="'name'" type="text" matInput/>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-label>Email: </mat-label>
+                <mat-form-field>
+                    <input [formControlName]="'email'" type="email" matInput/>
+                </mat-form-field>
+                <mat-error *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched">
+                    A valid email is needed
+                </mat-error>
+            </div>
+
+            <div>
+                <mat-label>Password: </mat-label>
+                <mat-form-field>
+                    <input [formControlName]="'password'" type="password" matInput/>
+                </mat-form-field>
+                <mat-error *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched">
+                    A valid password is needed : STRUGSDN
+                </mat-error>
+            </div>
+
+            <div>
+                <button (click)="signUp()" [disabled]="!signUpForm.valid" mat-button>Sign Up</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div *ngIf="errorMsg">
+        {{errorMsg}}
+    </div>
+
+    <div>
+        <button (click)="changeForm()">
+            {{isLogin ? 'Sign Up' : 'Login'}}
+        </button>
+    </div>
+
+</div>
