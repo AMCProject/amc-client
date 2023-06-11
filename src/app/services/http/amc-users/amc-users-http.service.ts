@@ -13,6 +13,7 @@ export class AmcUsersHttpService {
 
     private readonly loginPath = "/login";
     private readonly signUpPath = "/user";
+    private readonly userIdPath = "/user/:id"
 
     constructor(
         private httpClient: HttpClient
@@ -29,6 +30,27 @@ export class AmcUsersHttpService {
 
     signup(userDto: UserDto): Observable<UserDto> {
         return this.httpClient.post(this.URL + this.PORT + this.signUpPath, userDto).pipe(
+            map(res => res as UserDto),
+            catchError(this.processError)
+            );
+    }
+    
+    getUser(userDto: UserDto): Observable<UserDto> {
+        return this.httpClient.get(this.URL + this.PORT + this.userIdPath).pipe(
+            map(res => res as UserDto),
+            catchError(this.processError)
+            );
+    }
+
+    updateUser(userDto: UserDto): Observable<UserDto> {
+        return this.httpClient.put(this.URL + this.PORT + this.userIdPath, userDto).pipe(
+            map(res => res as UserDto),
+            catchError(this.processError)
+            );
+    }
+
+    deleteUser(userDto: UserDto): Observable<UserDto> {
+        return this.httpClient.delete(this.URL + this.PORT + this.userIdPath).pipe(
             map(res => res as UserDto),
             catchError(this.processError)
             );

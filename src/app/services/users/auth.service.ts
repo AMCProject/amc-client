@@ -42,4 +42,18 @@ export class AuthService {
         });
     }
 
+    updateUser(userDto: UserDto) {
+        this.usersHttpService.updateUser(userDto)
+        .pipe(catchError(error => {
+            this.errorMsg.next(error);
+            return [];
+        }))
+        .subscribe((user: UserDto) => {
+            this.errorMsg.next(null);
+            this.user = user;
+            console.warn(user);
+            // TODO REFRESH
+        });
+    }
+
 }
