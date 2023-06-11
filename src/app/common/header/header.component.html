@@ -1,0 +1,29 @@
+<div class="header">
+
+    <div class="navigation">
+
+        <a extended routerLink="/calendar" routerLinkActive="active" ariaCurrentWhenActive="page"> 
+            <mat-icon>calendar_today</mat-icon>
+            Calendar
+        </a>
+
+        <a extended routerLink="/meals" routerLinkActive="active" ariaCurrentWhenActive="page"> 
+            <mat-icon>local_dining</mat-icon>
+            Meals
+        </a>
+
+    </div>
+
+    <div class="user">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu"> 
+            <mat-icon>perm_identity</mat-icon>
+        </button>
+    </div>
+
+</div>
+
+<mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="logout()">Logout</button>
+    <button mat-menu-item>Update User</button>
+  </mat-menu>
+

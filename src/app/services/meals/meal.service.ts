@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { MealDto } from "src/app/models/dtos/MealDto";
 import { AmcMealsHttpService } from "../http/amc-meals/amc-meals-http.service";
 import { catchError, BehaviorSubject } from "rxjs";
+import { AuthService } from "../users/auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,10 +10,20 @@ import { catchError, BehaviorSubject } from "rxjs";
 export class MealService {
 
     meal: MealDto
-    meals: Array<MealDto>
+    meals: BehaviorSubject<MealDto[]> = new BehaviorSubject<MealDto[]>(null);
+    userId: string;
     errorMsg: BehaviorSubject<string> = new BehaviorSubject(null);
 
-    constructor(private mealsHttpService: AmcMealsHttpService) { }
+    constructor(
+        private mealsHttpService: AmcMealsHttpService,
+        private authService: AuthService
+        ) { 
+
+        this.authService.user.subscribe(user => {
+            this.userId = user ? user.id : null
+            this.listMeals();
+        })
+    }
 
     createMeal(mealDto: MealDto) {
         this.mealsHttpService.create(mealDto)
@@ -22,7 +33,7 @@ export class MealService {
         }))
         .subscribe((meal: MealDto) => {
             this.errorMsg.next(null);
-            this.meals.push(meal);
+            //this.meals.push(meal);
             console.warn(meal);
             // TODO REFRESH
         });
@@ -43,15 +54,15 @@ export class MealService {
     }
 
 
-    listMeals(id: string) {
-        this.mealsHttpService.list(id)
+    listMeals() {
+        this.mealsHttpService.list(this.userId)
         .pipe(catchError(error => {
             this.errorMsg.next(error);
             return [];
         }))
         .subscribe((meals: Array<MealDto>) => {
             this.errorMsg.next(null);
-            this.meals = meals;
+            this.meals.next(meals);
             console.warn(meals);
             // TODO REFRESH
         });
@@ -65,8 +76,8 @@ export class MealService {
         }))
         .subscribe((meal: MealDto) => {
             this.errorMsg.next(null);
-            const mealIndex = this.meals.findIndex(m => m.id == meal.id)
-            this.meals[mealIndex] = meal
+            //const mealIndex = this.meals.findIndex(m => m.id == meal.id)
+            //this.meals[mealIndex] = meal
             console.warn(meal);
             // TODO REFRESH
         });
@@ -80,7 +91,7 @@ export class MealService {
         }))
         .subscribe((meal: MealDto) => {
             this.errorMsg.next(null);
-            this.meals = this.meals.filter(m => m.id != meal.id);
+            //this.meals = this.meals.filter(m => m.id != meal.id);
             console.warn(meal);
             // TODO REFRESH
         });

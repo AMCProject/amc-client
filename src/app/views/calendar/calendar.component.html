@@ -1,0 +1,16 @@
+<div class="view">
+
+    <div *ngIf="!calendar">
+        <button mat-flat-button>
+            <mat-icon>add_circle</mat-icon>
+            Create calendar
+        </button>
+    </div>
+
+    <div *ngIf="calendar">
+        <div *ngFor="let calendarWeek of getWeeks()" class="">
+            <calendar-week [calendarDtos]="calendarWeek"/>
+        </div>
+    </div>
+
+</div>

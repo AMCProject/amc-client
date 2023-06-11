@@ -11,8 +11,10 @@ export class AmcCalendarsHttpService {
     private readonly URL = "http://localhost";
     private readonly PORT = ":3300";
 
-    private readonly calendarPath = "/user/:user_id/calendar";
-    private readonly calendarRedo = "/user/:user_id/redo";
+    private readonly USER_ID = ":user_id";
+
+    private readonly calendarPath = "/user/" + this.USER_ID + "/calendar";
+    private readonly calendarRedo = "/user/" + this.USER_ID + "/redo";
 
     constructor(
         private httpClient: HttpClient
@@ -21,14 +23,14 @@ export class AmcCalendarsHttpService {
     }
 
     create(id: string): Observable<Array<CalendarDto>> {
-        return this.httpClient.post(this.URL + this.PORT + this.calendarPath, null, {params: {user_id:id}}).pipe(
+        return this.httpClient.post(this.URL + this.PORT + this.calendarPath.replace(this.USER_ID, id), null).pipe(
             map(res => res as Array<CalendarDto>),
             catchError(this.processError)
             );
     }
 
     get(id: string): Observable<Array<CalendarDto>> {
-        return this.httpClient.get(this.URL + this.PORT + this.calendarPath, {params: {user_id:id}}).pipe(
+        return this.httpClient.get(this.URL + this.PORT + this.calendarPath.replace(this.USER_ID, id)).pipe(
             map(res => res as Array<CalendarDto>),
             catchError(this.processError)
             );
@@ -36,21 +38,21 @@ export class AmcCalendarsHttpService {
     
 
     update(caledarDto: CalendarDto): Observable<Array<CalendarDto>> {
-        return this.httpClient.put(this.URL + this.PORT + this.calendarPath, caledarDto, {params: {user_id:caledarDto.user_id}}).pipe(
+        return this.httpClient.put(this.URL + this.PORT + this.calendarPath.replace(this.USER_ID, caledarDto.user_id), caledarDto).pipe(
             map(res => res as Array<CalendarDto>),
             catchError(this.processError)
             );
     }
 
     delete(id: string): Observable<CalendarDto> {
-        return this.httpClient.delete(this.URL + this.PORT + this.calendarPath, {params: {user_id:id}}).pipe(
+        return this.httpClient.delete(this.URL + this.PORT + this.calendarPath.replace(this.USER_ID, id)).pipe(
             map(res => res as CalendarDto),
             catchError(this.processError)
             );
     }
 
     redo(id: string): Observable<Array<CalendarDto>> {
-        return this.httpClient.put(this.URL + this.PORT + this.calendarRedo, null, {params: {user_id:id}}).pipe(
+        return this.httpClient.put(this.URL + this.PORT + this.calendarRedo.replace(this.USER_ID, id), null).pipe(
             map(res => res as Array<CalendarDto>),
             catchError(this.processError)
             );

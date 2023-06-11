@@ -1,42 +1,50 @@
 import { Injectable } from "@angular/core";
 import { CalendarDto } from "src/app/models/dtos/CalendarDto";
 import { AmcCalendarsHttpService } from "../http/amc-calendars/amc-calendars-http.service";
-import { catchError, BehaviorSubject } from "rxjs";
+import { catchError, BehaviorSubject, Observable, of } from "rxjs";
+import { AuthService } from "../users/auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CalendarService {
 
-    calendar: Array<CalendarDto>;
+    calendar: BehaviorSubject<Array<CalendarDto>> = new BehaviorSubject<Array<CalendarDto>>(null);
+    userId: string;
     errorMsg: BehaviorSubject<string> = new BehaviorSubject(null);
 
-    constructor(private calendarsHttpService: AmcCalendarsHttpService) { }
+    constructor(
+        private calendarsHttpService: AmcCalendarsHttpService,
+        private authService: AuthService
+        ) { 
+            this.authService.user.subscribe(user => {
+                this.userId = user ? user.id : null
+                this.getCalendar();
+            })
+        }
 
-    createCalendar(id: string) {
-        this.calendarsHttpService.create(id)
+    createCalendar() {
+        this.calendarsHttpService.create(this.userId)
         .pipe(catchError(error => {
             this.errorMsg.next(error);
             return [];
         }))
         .subscribe((calendar: Array<CalendarDto>) => {
             this.errorMsg.next(null);
-            this.calendar = calendar;
-            console.warn(calendar);
+            this.calendar.next(calendar);
             // TODO REFRESH
         });
     }
 
-    getCalendar(id: string) {
-        this.calendarsHttpService.get(id)
+    getCalendar(): void {
+        this.calendarsHttpService.get(this.userId)
         .pipe(catchError(error => {
             this.errorMsg.next(error);
             return [];
         }))
         .subscribe((calendar: Array<CalendarDto>) => {
             this.errorMsg.next(null);
-            this.calendar = calendar;
-            console.warn(calendar);
+            this.calendar.next(calendar);
             // TODO REFRESH
         });
     }
@@ -50,36 +58,33 @@ export class CalendarService {
         }))
         .subscribe((calendar: Array<CalendarDto>) => {
             this.errorMsg.next(null);
-            this.calendar = calendar;
-            console.warn(calendar);
+            this.calendar.next(calendar);
             // TODO REFRESH
         });
     }
 
-    deleteCalendar(id: string) {
-        this.calendarsHttpService.delete(id)
+    deleteCalendar() {
+        this.calendarsHttpService.delete(this.userId)
         .pipe(catchError(error => {
             this.errorMsg.next(error);
             return [];
         }))
         .subscribe((calendar: Array<CalendarDto>) => {
             this.errorMsg.next(null);
-            this.calendar = new Array<CalendarDto>
-            console.warn(calendar);
+            this.calendar.next(null);
             // TODO REFRESH
         });
     }
 
-    redoCalendar(id: string) {
-        this.calendarsHttpService.redo(id)
+    redoCalendar() {
+        this.calendarsHttpService.redo(this.userId)
         .pipe(catchError(error => {
             this.errorMsg.next(error);
             return [];
         }))
         .subscribe((calendar: Array<CalendarDto>) => {
             this.errorMsg.next(null);
-            this.calendar = calendar
-            console.warn(calendar);
+            this.calendar.next(calendar);
             // TODO REFRESH
         });
     }

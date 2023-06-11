@@ -1,0 +1,8 @@
+<mat-card class="calendar-day" (click)="openMeal()">
+    <mat-card-header>{{calendarDay.date}}</mat-card-header>
+    <mat-card-content>{{calendarDay.name}}</mat-card-content>
+
+    <mat-card-actions>
+        <button mat-icon-button (click)="editMeal($event)"><mat-icon>edit</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

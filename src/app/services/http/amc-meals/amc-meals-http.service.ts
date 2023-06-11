@@ -11,8 +11,10 @@ export class AmcMealsHttpService {
     private readonly URL = "http://localhost";
     private readonly PORT = ":3200";
 
-    private readonly mealPath = "/user/:user_id/meal";
-    private readonly mealIdPath = "/user/:user_id/meal/:id";
+    private readonly USER_ID = ":user_id";
+
+    private readonly mealPath = "/user/" + this.USER_ID + "/meal";
+    private readonly mealIdPath = "/user/" + this.USER_ID + "/meal/:id";
 
     constructor(
         private httpClient: HttpClient
@@ -35,7 +37,7 @@ export class AmcMealsHttpService {
     }
 
     list(id: string): Observable<Array<MealDto>> {
-        return this.httpClient.get(this.URL + this.PORT + this.mealPath, {params: {user_id:id}}).pipe(
+        return this.httpClient.get(this.URL + this.PORT + this.mealPath.replace(this.USER_ID, id), {params: {user_id:id}}).pipe(
             map(res => res as Array<MealDto>),
             catchError(this.processError)
             );
