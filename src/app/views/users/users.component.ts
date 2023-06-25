@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserDto } from 'src/app/models/dtos/UserDto';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from 'src/app/services/users/auth.service';
+import { AuthService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'amc-authentication',
@@ -24,8 +24,8 @@ export class AuthenticationComponent {
     private snackBar: MatSnackBar
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl('cobo@mail.com', [Validators.required, Validators.email]),
-      password: new FormControl('Mypass1!', [Validators.required, Validators.pattern(this.passwordValidator)])
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.passwordValidator)])
     })
 
     this.signUpForm = new FormGroup({

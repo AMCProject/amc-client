@@ -30,7 +30,7 @@ export class CalendarComponent {
     this.calendarService.loading.subscribe(loading => this.loading = loading);
     this.calendarService.errorMsg.subscribe(em => {
       this.errorMsg = em
-      if (em && em.toString().includes("meal not found")) {
+      if (em) {
         this.snackBar.open(em, "OK");
       }
     });

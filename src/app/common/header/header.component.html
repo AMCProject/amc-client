@@ -10,10 +10,10 @@
             </button>
             <button mat-button extended routerLink="/meals" routerLinkActive="active" ariaCurrentWhenActive="page" class="colorBtn">
                 <mat-icon>local_dining</mat-icon>
-                Menu
+                Menú
             </button>
             <button mat-button extended routerLink="/meals-api" routerLinkActive="active" ariaCurrentWhenActive="page" class="colorBtn">
-                <mat-icon>euro_symbol</mat-icon>
+                <mat-icon>more_horiz</mat-icon>
                 Otras comidas
             </button>
         </div>
@@ -27,6 +27,6 @@
 </div>
 
 <mat-menu #userMenu="matMenu">
-    <button mat-menu-item (click)="logout()">Logout</button>
+    <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
 </mat-menu>
 

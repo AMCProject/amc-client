@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserDto } from 'src/app/models/dtos/UserDto';
-import { AuthService } from 'src/app/services/users/auth.service';
+import { AuthService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'header',

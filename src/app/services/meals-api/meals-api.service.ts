@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MealDto } from "src/app/models/dtos/MealDto";
 import { AmcMealsHttpService } from "../http/amc-meals/amc-meals-http.service";
 import { catchError, BehaviorSubject, Observable } from "rxjs";
-import { AuthService } from "../users/auth.service";
+import { AuthService } from "../users/user.service";
 import { MealService } from "../meals/meal.service";
 
 @Injectable({

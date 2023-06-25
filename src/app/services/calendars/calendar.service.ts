@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CalendarDto } from "src/app/models/dtos/CalendarDto";
 import { AmcCalendarsHttpService } from "../http/amc-calendars/amc-calendars-http.service";
 import { catchError, BehaviorSubject, Observable, of } from "rxjs";
-import { AuthService } from "../users/auth.service";
+import { AuthService } from "../users/user.service";
 
 @Injectable({
     providedIn: 'root'
