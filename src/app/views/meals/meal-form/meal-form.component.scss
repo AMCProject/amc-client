@@ -1,0 +1,30 @@
+.meal-form {
+}
+
+.dialog-content {
+}
+
+.meal-form-form {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-items: center;
+    row-gap: 10px;
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+    }
+
+    .form-field {
+        width: 100%;
+    }
+}
+
+.ingredient {
+    margin-right: 5px;
+}

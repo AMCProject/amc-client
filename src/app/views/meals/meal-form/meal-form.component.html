@@ -1,0 +1,66 @@
+<div class="meal-form">
+    <h2 mat-dialog-title>{{isUpdate ? 'Actualizar' : 'Crear'}} Comida</h2>
+    <mat-dialog-content class="dialog-content">
+        <form [formGroup]="mealForm" class="meal-form-form">
+            <div class="form-group">
+                <mat-form-field class="form-field">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [formControlName]="'name'" type="text" placeholder="Nombre" maxlength="90"/>
+                    <mat-error *ngIf="mealForm.get('name').invalid && mealForm.get('name').touched">
+                        Es necesario un nombre
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field class="form-field">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput [formControlName]="'description'" type="text" placeholder="Descripción" maxlength="90"/>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field class="form-field">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select [formControlName]="'type'">
+                        <mat-option *ngFor="let type of types | keyvalue" [value]="type.value">{{type.value}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="mealForm.get('type').invalid && mealForm.get('type').touched">
+                        Es necesario indicar el tipo de comida
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field class="form-field">
+                    <mat-label>Temporadas</mat-label>
+                    <mat-select [formControlName]="'seasons'" multiple>
+                    <mat-option *ngFor="let season of seasons | keyvalue" [value]="season.value">{{season.value}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="mealForm.get('seasons').invalid && mealForm.get('seasons').touched">
+                    Es necesario indicar las temporadas
+                </mat-error>
+                </mat-form-field>
+            </div>
+            <mat-form-field class="form-field">
+                <mat-label>Imágen</mat-label>
+                <input matInput [formControlName]="'image'" type="text" placeholder="Imagen"/>
+            </mat-form-field>
+            <div class="ingredients">
+                <button (click)="selectIngredients()" mat-button>Modificar Ingredientes</button>
+                <div>
+                    <span *ngFor="let i of mealForm.get('ingredients').value" class="ingredient">{{i}}</span>
+                </div>
+    
+                <mat-error *ngIf="mealForm.get('ingredients').invalid && mealForm.get('ingredients').touched">
+                    Es necesario indicar los ingredientes
+                </mat-error>
+            </div>
+            <div *ngIf="errorMsg">
+                {{errorMsg}}
+            </div>
+        </form>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions [align]="'end'">
+        <button mat-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+        <button mat-button (click)="saveMeal()" [disabled]="!mealForm.valid">{{isUpdate ? 'Actualizar' : 'Crear'}}</button>
+      </mat-dialog-actions>
+
+</div>

@@ -1,13 +1,11 @@
 <div class="meal-view">
+    <meal-search (searchFormEmitter)="searchFormChange($event)" class="meals-search"/>
 
     <div class="meals">
-        <div *ngFor="let meal of meals">
-
+        <div *ngFor="let meal of filteredMeals">
             <meal-card [meal]="meal"/>
             <br><br>
-    
         </div>
     </div>
-
 
 </div>

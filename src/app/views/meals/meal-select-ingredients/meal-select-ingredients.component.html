@@ -1,0 +1,70 @@
+<div class="select-ingredients">
+
+    <h2 mat-dialog-title>Cambiar Comida</h2>
+
+    <mat-dialog-content>
+
+        <mat-form-field *ngIf="!filterByGroup">
+            <mat-label>Nombre</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Bacon" #input>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="filterByGroup">
+            <mat-label>Tipo</mat-label>
+            <mat-select (valueChange)="changeGroupSelected($event)">
+                <mat-option>Todos</mat-option>
+                <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-button (click)="changeFilterType()">Filtrar por {{filterByGroup ? 'Nombre' : 'Grupo'}}</button>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+              </th>
+
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+          
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="kcal">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Kcal </th>
+              <td mat-cell *matCellDef="let element"> {{element.kcal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="group">
+                <th mat-header-cell *matHeaderCellDef> Grupo </th>
+                <td mat-cell *matCellDef="let element"> {{element.group}} </td>
+              </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons> </mat-paginator>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions [align]="'end'">
+        <button mat-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+        <button mat-button (click)="save()">Guardar</button>
+      </mat-dialog-actions>
+</div>

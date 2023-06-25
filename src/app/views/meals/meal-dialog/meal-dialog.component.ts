@@ -12,9 +12,8 @@ export class MealDialogComponent {
     constructor(
       public dialogRef: MatDialogRef<MealDialogComponent>,
       @Inject(MAT_DIALOG_DATA) public meal: MealDto,
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  ) {
+   
   }
+
 }

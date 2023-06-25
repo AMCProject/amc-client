@@ -15,6 +15,7 @@ export class AmcCalendarsHttpService {
 
     private readonly calendarPath = "/user/" + this.USER_ID + "/calendar";
     private readonly calendarRedo = "/user/" + this.USER_ID + "/redo";
+    private readonly calendarRedoWeek = "/user/" + this.USER_ID + "/redoweek";
 
     constructor(
         private httpClient: HttpClient
@@ -53,6 +54,15 @@ export class AmcCalendarsHttpService {
 
     redo(id: string): Observable<Array<CalendarDto>> {
         return this.httpClient.put(this.URL + this.PORT + this.calendarRedo.replace(this.USER_ID, id), null).pipe(
+            map(res => res as Array<CalendarDto>),
+            catchError(this.processError)
+            );
+    }
+
+    redoWeek(fromDate: string, toDate: string, id: string): Observable<Array<CalendarDto>> {
+        const body = { "from": fromDate, "to": toDate };
+
+        return this.httpClient.put(this.URL + this.PORT + this.calendarRedoWeek.replace(this.USER_ID, id), body).pipe(
             map(res => res as Array<CalendarDto>),
             catchError(this.processError)
             );

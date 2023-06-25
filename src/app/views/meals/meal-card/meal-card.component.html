@@ -1,20 +1,18 @@
 <mat-card class="meal-card" (click)="openMeal()">
-    
     <mat-card-header>
-        <mat-card-title>{{meal.name}}</mat-card-title>
+        <mat-card-title class="title">{{meal.name}}</mat-card-title>
         <mat-card-subtitle>{{meal.type}}</mat-card-subtitle>
     </mat-card-header>
-
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-
+    <img mat-card-image class="img" [src]="meal.image ? meal.image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930' ">
     <mat-card-content>
-        {{meal.description}} <br>
-        Kcal: {{meal.kcal}} <br>
-        Season: {{meal.seasons}}
+        <p class="description">{{meal.description}}</p>
+        <p><b>Kcal:</b> {{meal.kcal}} </p>
+        <p><b>Season:</b> {{meal.seasons}}
     </mat-card-content>
 
-    <mat-card-actions>
-        <button mat-icon-button (click)="$event.stopPropagation(); deleteMeal()"><mat-icon>delete</mat-icon></button>
+    <mat-card-actions class="actions">
+        <button mat-icon-button class = btn (click)="$event.stopPropagation(); updateMeal()"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button  class = "btn" (click)="$event.stopPropagation(); deleteMeal()"><mat-icon>delete</mat-icon></button>
     </mat-card-actions>
 
 </mat-card>

@@ -1,8 +1,16 @@
-<mat-card class="calendar-day" (click)="openMeal()">
-    <mat-card-header>{{calendarDay.date}}</mat-card-header>
-    <mat-card-content>{{calendarDay.name}}</mat-card-content>
+<mat-card class="calendar-day" (click)="openMeal()" [ngClass]="{'current-day': isCurrentDay, 'valid-meal': isValidMeal}">
+    
+    <mat-card-header class="date">
+        <mat-card-title class="date-text">{{calendarDay.date}}</mat-card-title>
+    </mat-card-header>
 
-    <mat-card-actions>
-        <button mat-icon-button (click)="editMeal($event)"><mat-icon>edit</mat-icon></button>
+    <mat-card-content>
+        <div class="meal">
+            {{calendarDay.meal_id ? calendarDay.name : ''}}
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions class="actions">
+        <button mat-icon-button (click)="editMeal($event)" class="edit-btn"><mat-icon>edit</mat-icon></button>
     </mat-card-actions>
 </mat-card>

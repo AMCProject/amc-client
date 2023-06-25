@@ -1,0 +1,36 @@
+<div class="meal-search">
+
+    <div class="form-container sign-up-container">
+        <form [formGroup]="searchForm">
+
+            <mat-form-field class="input">
+                <mat-label>Nombre</mat-label>
+                <input [formControlName]="'name'" matInput placeholder="Ej. Pizza">
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <mat-label>Tipo</mat-label>
+                <mat-select [formControlName]="'type'">
+                    <mat-option>Todos</mat-option>
+                    <mat-option *ngFor="let type of types | keyvalue" [value]="type.value">{{type.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="input">
+                <mat-label>Temporada</mat-label>
+                <mat-select [formControlName]="'seasons'" multiple>
+                    <mat-option *ngFor="let season of seasons | keyvalue" [value]="season.value">{{season.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-checkbox [formControlName]="'kcal'" class="checkbox"> Ordenar por Kcal </mat-checkbox>
+
+        </form>
+    </div>
+
+
+    <button mat-raised-button (click)="createMeal()" class="colorBtn">
+        <mat-icon>add_circle</mat-icon>
+        Crear Comida
+    </button>
+</div>

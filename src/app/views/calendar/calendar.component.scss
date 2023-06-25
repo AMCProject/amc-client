@@ -1,0 +1,86 @@
+.calendar-view {
+    height: calc(100% - 75px);
+    width: 100%;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.spinner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-button {
+    margin-top: 50px;
+    align-self: center;
+
+    .create-button-button {
+        background-color: #1b8d8c;
+        color: white;
+    }
+}
+
+.calendar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .actions {
+        display: flex;
+        margin: 20px 20px 20px 20px;
+        column-gap: 10px;
+
+        .redo-button{
+            color: white;
+            background-color: #1b8d8c;
+        }
+
+        .pdf-button{
+            color: white;
+            background-color: rgb(203, 35, 35);
+        }
+    }
+
+    .calendar-calendar {
+        margin: 0 0 20px 0;
+
+    }
+
+    .export-pdf {
+        display: flex;
+        justify-content: last baseline;
+
+        button{
+            color: rgb(220, 220, 220);
+            background-color: rgb(63, 63, 63);
+        }
+    }
+    
+    .day-labels {
+        margin: 10px 0 10px -45px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 1270px;
+        font-weight: bold;
+    
+        .day-label{
+            //width: 180px;
+            color: rgb(55, 55, 55);
+            text-transform: uppercase;
+
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.pdf {
+    margin-left: 45px
+}

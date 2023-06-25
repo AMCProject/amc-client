@@ -1,8 +1,19 @@
 <div class="calendar-week">
-    <div class="calendar-week-day" *ngFor="let calendarDay of calendarDtos">
-
-        <calendar-day [calendarDay]="calendarDay"/>
     
+    <div class="calendar-week-in" [ngClass]="{'first': index==0, 'last': index==3}">
+        <div class="calendar-week-day" *ngFor="let calendarDay of calendarDtos">
+
+            <calendar-day [calendarDay]="calendarDay"/>
+        
+        </div>
     </div>
+
+
+    <div *ngIf="!isCurrentWeek" class="redo">
+
+        <button mat-icon-button (click)="redoWeek()"><mat-icon>sync</mat-icon></button>
+
+    </div>
+
 </div>
 

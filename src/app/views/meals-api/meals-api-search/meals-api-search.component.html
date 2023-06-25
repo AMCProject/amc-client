@@ -1,0 +1,15 @@
+<div class="meal-search">
+
+    <div class="form-container sign-up-container">
+        <form [formGroup]="searchForm">
+
+            <mat-form-field class="input">
+                <mat-label>Nombre</mat-label>
+                <input [formControlName]="'name'" matInput placeholder="Ej. Pizza">
+            </mat-form-field>
+
+            <button mat-icon-button (click)="search()"><mat-icon>search</mat-icon></button>
+
+        </form>
+    </div>
+</div>

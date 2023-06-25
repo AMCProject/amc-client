@@ -1,0 +1,21 @@
+.meal-search {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input{
+    padding: 10px;
+}
+
+.checkbox {
+    top: -7px
+}
+
+.colorBtn{
+    background-color: #1b8d8c !important;
+    color: white !important;
+}

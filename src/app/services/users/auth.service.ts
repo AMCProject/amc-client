@@ -3,6 +3,8 @@ import { UserDto } from "src/app/models/dtos/UserDto";
 import { AmcUsersHttpService } from "../http/amc-users/amc-users-http.service";
 import { catchError, BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
+import { MealService } from "../meals/meal.service";
+import { CalendarService } from "../calendars/calendar.service";
 
 @Injectable({
     providedIn: 'root'

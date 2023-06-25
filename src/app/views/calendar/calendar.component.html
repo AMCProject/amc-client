@@ -1,16 +1,36 @@
-<div class="view">
+<div class="calendar-view">
 
-    <div *ngIf="!calendar">
-        <button mat-flat-button>
+    <div *ngIf="loading" class="spinner">
+        <mat-spinner [diameter]="150"></mat-spinner>
+    </div>
+
+    <div *ngIf="!calendar && !loading" class="create-button">
+        <button mat-flat-button (click)="createCalendar()" class="create-button-button">
             <mat-icon>add_circle</mat-icon>
-            Create calendar
+            Crear Calendario
         </button>
     </div>
 
-    <div *ngIf="calendar">
-        <div *ngFor="let calendarWeek of getWeeks()" class="">
-            <calendar-week [calendarDtos]="calendarWeek"/>
+    <div *ngIf="calendar && !loading" class="calendar">
+
+        <div class="actions">
+            <button mat-flat-button (click)="redoAll()" class="redo-button">Rehacer todo</button>
+            <button mat-flat-button (click)="exportPdf()" class="pdf-button">Exportar a PDF</button>
         </div>
+
+        <div class="day-labels">
+            <div *ngFor="let dayLabel of DAY_LABELS" class="day-label">
+                {{dayLabel}}
+            </div>
+        </div>
+
+
+        <div class="calendar-calendar">
+            <div *ngFor="let calendarWeek of getWeeks(); let i=index" class="calendar-week-out">
+                <calendar-week [calendarDtos]="calendarWeek" [index]="i"/>
+            </div>
+        </div>
+
     </div>
 
 </div>
