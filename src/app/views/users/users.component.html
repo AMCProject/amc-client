@@ -3,61 +3,53 @@
 	
         <div class="form-container sign-up-container">
             <form [formGroup]="signUpForm">
-                <h1>Create Account</h1>
+                <h1>Crear una Cuenta</h1>
     
                 <input [formControlName]="'name'" type="text" placeholder="Name"/>
     
                 <input [formControlName]="'email'" type="email" placeholder="Email"/>
                 <mat-error *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched">
-                    A valid email is needed
+                    Es necesario un mail válido.
                 </mat-error>
     
                 <input [formControlName]="'password'" type="password" placeholder="Password"/>
                 <mat-error *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched">
-                    A valid password is needed
+                    Es necesario una contraseña válida: mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.
                 </mat-error>
     
-                <button (click)="signUp()" [disabled]="!signUpForm.valid">Sign Up</button>
-    
-                <div *ngIf="errorMsg">
-                    {{errorMsg}}
-                </div>
+                <button (click)="signUp()" [disabled]="!signUpForm.valid">Registrarse</button>
             </form>
         </div>
     
         <div class="form-container sign-in-container">
             <form [formGroup]="loginForm">
-                <h1>Sign in</h1>
+                <h1>Iniciar Sesión</h1>
     
                 <input [formControlName]="'email'" type="email" placeholder="Email"/>
                 <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
-                    A valid email is needed
+                    Es necesario un mail válido.
                 </mat-error>
     
                 <input [formControlName]="'password'" type="password" placeholder="Password"/>
                 <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-                    A valid password is needed
+                    Es necesario una contraseña válida: mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.
                 </mat-error>
     
-                <button (click)="login()" [disabled]="!loginForm.valid">Sign In</button>
-    
-                <div *ngIf="errorMsg">
-                    {{errorMsg}}
-                </div>
+                <button (click)="login()" [disabled]="!loginForm.valid">Iniciar Sesión</button>
             </form>
         </div>
         
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button (click)="changeForm()" class="ghost" id="signIn">Sign In</button>
+                    <h1>¡Me alegra verte de nuevo!</h1>
+                    <p>Por favor, incia sesión con tu email y contraseña para seguir disfrutando de nuestra aplicación</p>
+                    <button (click)="changeForm()" class="ghost" id="signIn">Iniciar Sesión</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button (click)="changeForm()" class="ghost" id="signUp">Sign Up</button>
+                    <h1>¡Bienvenido!</h1>
+                    <p>Introduce los datos necesarios para comenzar a usar nuestra aplicación</p>
+                    <button (click)="changeForm()" class="ghost" id="signUp">Registrarse</button>
                 </div>
             </div>
         </div>

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserDto } from 'src/app/models/dtos/UserDto';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/users/auth.service';
 
 @Component({
   selector: 'amc-authentication',
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.scss']
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
 export class AuthenticationComponent {
 
@@ -19,7 +20,8 @@ export class AuthenticationComponent {
   private passwordValidator = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('cobo@mail.com', [Validators.required, Validators.email]),
@@ -32,8 +34,12 @@ export class AuthenticationComponent {
       password: new FormControl('', [Validators.required, Validators.pattern(this.passwordValidator)])
     })
 
-    this.authService.errorMsg.subscribe(errMsg => this.errorMsg = errMsg)
-
+    this.authService.errorMsg.subscribe(errMsg => {
+      this.errorMsg = errMsg
+      if (errMsg) {
+        this.snackBar.open(errMsg, "OK");
+      }
+    });
   }
 
   ngOnInit() {

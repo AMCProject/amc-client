@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationComponent } from './views/authentication/authentication.component';
+import { AuthenticationComponent } from './views/users/users.component';
 import { CalendarComponent } from './views/calendar/calendar.component';
 import { AuthGuardService } from './services/users/auth-guard.service';
 import { MealsComponent } from './views/meals/meals.component';

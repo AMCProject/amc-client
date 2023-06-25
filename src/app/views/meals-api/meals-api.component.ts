@@ -31,7 +31,7 @@ export class MealsApiComponent {
     this.mealsApiService.errorMsg.subscribe(em => {
       this.errorMsg = em
       if (em) {
-        // this.snackBar.open(em, "OK");
+        this.snackBar.open(em, "OK");
       }
     });
 
