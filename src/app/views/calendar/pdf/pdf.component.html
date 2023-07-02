@@ -8,7 +8,6 @@
                     <div class="date">{{day.date}}</div>
         
                     <div *ngIf="getMealById(day.meal_id)" class="meal">
-                        <img mat-card-image class="img" [src]="getMealById(day.meal_id).image ? getMealById(day.meal_id).image : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930' ">
 
                         <div class="property"><span class="title">Nombre: </span>{{getMealById(day.meal_id).name }}</div>
                         <div class="property"><span class="title">Descripción: </span>{{getMealById(day.meal_id).description }}</div>
